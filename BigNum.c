@@ -254,10 +254,35 @@ static void abssubtractBigNums (BigNum bnS, BigNum bnL, BigNum *res)
 {
 	int carry = 0;
 	int diff = 0; // intermediate diff
-	
-	append the diff if it’s positive to end of result 
-	If diff is negative then add 10 and keep track of carry as 1 if it’s positive then carry is 0
-	
+	for(int i1 = 0; i1 < bnS.nbytes; i1++) // lower digits
+	{
+		diff = ctoi(bnL.bytes[i1]) - ctoi(bnS.bytes[i1]) - carry;
+		if(diff >= 0) // no borrowing
+		{
+			carry = 0;
+		}
+		if(diff < 0) // borrowing
+		{
+			carry = 1;
+			diff = diff + 10;
+		}
+		res->bytes[i1] = itoc(diff);
+	}
+	int i2;
+	for(i2 = bnS.nbytes; i2 < bnL.nbytes; i2++) // higher digits
+	{
+		diff = ctoi(bnL.bytes[i2]) - carry;
+		if(diff >= 0) // no borrowing
+		{
+			carry = 0;
+		}
+		if(diff < 0) // borrowing
+		{
+			carry = 1;
+			diff = diff + 10;
+		}
+		res->bytes[i2] = itoc(diff);
+	}
 	
 	return;
 }

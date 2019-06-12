@@ -38,17 +38,17 @@ int main (int argc, char *argv[])
 	}
 	
 	// Calculations
-	if() // num1+num2, store result in res
+	if(strcmp(argv[3], "add") == 0) // num1+num2, store result in res
 	{
 		addBigNums (num1, num2, &res);
 		printf ("Sum of "); 
 	} 
-	if() // num1-num2, store result in res
+	if(strcmp(argv[3], "sub") == 0) // num1-num2, store result in res
 	{
 		subtractBigNums (num1, num2, &res);
 		printf ("Difference of "); 
 	}
-	if () // num1*num2, store result in res
+	if (strcmp(argv[3], "mul") == 0) // num1*num2, store result in res
 	{
 		multiplyBigNums (num1, num2, &res);
 		printf ("Product of "); 
@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
 	// print process continue 
 	showBigNum (num1);
 	printf ("\nand ");  showBigNum (num2);
-	printf ("\nis ");   showBigNum (sum);
+	printf ("\nis ");   showBigNum (res);
 	printf ("\n");
 
 	/*// debugging :<

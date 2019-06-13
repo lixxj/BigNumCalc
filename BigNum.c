@@ -339,7 +339,7 @@ void addBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 {
 	BigNum bnS = smallerabs (bnA, bnB);
 	BigNum bnL = largerabs (bnA, bnB);
-	res->nbytes = bnL.nbytes + 1; // larger* BigNum + (potential)carry
+	res->nbytes = bnL.nbytes + 1; // largerabs BigNum + (potential)carry
 	res->bytes = realloc(res->bytes, ((res->nbytes) + 1)); // resize to BigNum size + sign byte
 	initZero(res);
 	// check, change sign and call computation functions
@@ -347,13 +347,12 @@ void addBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 	{
 		res->bytes[res->nbytes] = POSITIVE;
 		absaddBigNums (bnS, bnL, res);
-	} else if (bnS.bytes[bnS.nbytes] == NEGATIVE && bnL.bytes[bnL.nbytes] == NEGATIVE) // N, N => - (P + P)
+	} else if (bnS.bytes[bnS.nbytes] == NEGATIVE && bnL.bytes[bnL.nbytes] == NEGATIVE) // N + N => - (P + P)
 	{
 		res->bytes[res->nbytes] = NEGATIVE;
 		absaddBigNums (bnS, bnL, res);
 	} else if (bnA.bytes[bnA.nbytes] == POSITIVE && bnB.bytes[bnB.nbytes] == NEGATIVE) // P + N
-	{
-		
+	{		
 		/*// Debugging :<
 		printf("bnA = ");
 		for(int i = 0; i < bnA.nbytes + 1; i++) 
@@ -387,7 +386,36 @@ void addBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 // Subtract two BigNums and store result in a third BigNum
 void subtractBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 {
-	// TODO
+	BigNum bnS = smallerabs (bnA, bnB);
+	BigNum bnL = largerabs (bnA, bnB);
+	res->nbytes = bnL.nbytes + 1; // largerabs BigNum + (potential)carry
+	res->bytes = realloc(res->bytes, ((res->nbytes) + 1)); // resize to BigNum size + sign byte
+	initZero(res);
+	// check, change sign and call computation functions
+	if (bnS.bytes[bnS.nbytes] == POSITIVE && bnL.bytes[bnL.nbytes] == POSITIVE) // P - P => P + N
+	{
+		if(hassmallerabs (bnA, bnB) == TRUE) 
+		{
+			res->bytes[res->nbytes] = NEGATIVE;
+		}
+		abssubtractBigNums (bnS, bnL, res);
+	} else if (bnS.bytes[bnS.nbytes] == NEGATIVE && bnL.bytes[bnL.nbytes] == NEGATIVE) // N - N => N + P
+	{
+		if(hassmallerabs (bnB, bnA) == TRUE) 
+		{
+			res->bytes[res->nbytes] = NEGATIVE;
+		}
+		abssubtractBigNums (bnS, bnL, res);
+	} else if (bnA.bytes[bnA.nbytes] == POSITIVE && bnB.bytes[bnB.nbytes] == NEGATIVE) // P - N => P + P
+	{
+		res->bytes[res->nbytes] = POSITIVE;
+		absaddBigNums (bnS, bnL, res);
+	} else if (bnA.bytes[bnA.nbytes] == NEGATIVE && bnB.bytes[bnB.nbytes] == POSITIVE) // N - P => - (P + P)
+	{
+		res->bytes[res->nbytes] = NEGATIVE;
+		absaddBigNums (bnS, bnL, res);
+	} 
+
 	return;
 }
 

@@ -12,11 +12,11 @@ int main (int argc, char *argv[])
 	BigNum num2; // second input number
 	BigNum res; // sum/diff/product
 
-	if (argc != 4) 
+	if (argc != 4 || (strcmp(argv[2], "+") != 0 && strcmp(argv[2], "-") != 0 && strcmp(argv[2], "*") != 0)) 
 	{
-		printf ("Usage1: %s Num1 Num2 add\n", argv[0]);
-		printf ("Usage2: %s Num1 Num2 sub\n", argv[0]);
-		printf ("Usage2: %s Num1 Num2 mul\n", argv[0]);	
+		printf ("%s Num1 + Num2\n", argv[0]);
+		printf ("%s Num1 - Num2\n", argv[0]);
+		printf ("%s Num1 * Num2\n", argv[0]);	
 		return 1;
 	}
 
@@ -31,24 +31,24 @@ int main (int argc, char *argv[])
 		printf ("First number invalid\n");
 		return 1;
 	}
-	if (!scanBigNum (argv[2], &num2)) 
+	if (!scanBigNum (argv[3], &num2)) 
 	{
 		printf ("Second number invalid\n");
 		return 1;
 	}
 	
 	// Calculations
-	if(strcmp(argv[3], "add") == 0) // num1+num2, store result in res
+	if(strcmp(argv[2], "+") == 0) // num1+num2, store result in res
 	{
 		addBigNums (num1, num2, &res);
 		printf ("Sum of "); 
 	} 
-	if(strcmp(argv[3], "sub") == 0) // num1-num2, store result in res
+	if(strcmp(argv[2], "-") == 0) // num1-num2, store result in res
 	{
 		subtractBigNums (num1, num2, &res);
 		printf ("Difference of "); 
 	}
-	if (strcmp(argv[3], "mul") == 0) // num1*num2, store result in res
+	if (strcmp(argv[2], "*") == 0) // num1*num2, store result in res
 	{
 		multiplyBigNums (num1, num2, &res);
 		printf ("Product of "); 

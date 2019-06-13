@@ -150,10 +150,12 @@ static BigNum same_length_smallerabs (BigNum bnA, BigNum bnB)
 		if (bnA.bytes[i] > bnB.bytes[i])
 		{
 			smaller = bnB;
+			break;
 		} 
 		if (bnA.bytes[i] < bnB.bytes[i])
 		{
 			smaller = bnA;
+			break;
 		}
 		if (bnA.bytes[i] == bnB.bytes[i])
 		{
@@ -162,6 +164,49 @@ static BigNum same_length_smallerabs (BigNum bnA, BigNum bnB)
 	}
 
 	return smaller;
+}
+
+// If abs(bnA) < abs(bnB), TRUE; Else, FALSE. Same length
+static int same_length_hassmallerabs (BigNum bnA, BigNum bnB)
+{
+	int res = FALSE; //result
+	for(int i = (bnA.nbytes - 1); i >= 0; i--) 
+	{
+		if (bnA.bytes[i] > bnB.bytes[i])
+		{
+			res = FALSE;
+			break;
+		} 
+		if (bnA.bytes[i] < bnB.bytes[i])
+		{
+			res = TRUE;
+			break;
+		}
+		if (bnA.bytes[i] == bnB.bytes[i])
+		{
+			continue;
+		}
+	}
+
+	return res;
+}
+
+// If abs(bnA) < abs(bnB), TRUE; Else, FALSE 
+static int hassmallerabs (BigNum bnA, BigNum bnB)
+{
+	int res = FALSE; // result
+	if(bnA.nbytes > bnB.nbytes)
+	{
+		res = FALSE;
+	} else if(bnA.nbytes < bnB.nbytes)
+	{
+		res = TRUE;
+	} else // bnA.nbytes == bnB.nbytes
+	{
+		res = same_length_hassmallerabs (bnA, bnB); // byte by byte check		
+	}
+	
+	return res;
 }
 
 // Return the BigNum with smaller absolute value
@@ -191,10 +236,12 @@ static BigNum same_length_largerabs (BigNum bnA, BigNum bnB)
 		if (bnA.bytes[i] < bnB.bytes[i])
 		{
 			larger = bnB;
+			break;
 		} 
 		if (bnA.bytes[i] > bnB.bytes[i])
 		{
 			larger = bnA;
+			break;
 		}
 		if (bnA.bytes[i] == bnB.bytes[i])
 		{
@@ -306,21 +353,37 @@ void addBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 		absaddBigNums (bnS, bnL, res);
 	} else if (bnA.bytes[bnA.nbytes] == POSITIVE && bnB.bytes[bnB.nbytes] == NEGATIVE) // P + N
 	{
-		// if abs(bnA) < abs(bnB)
-			// res->sign->negative
-		// abssubtractBigNums (bnS, bnL, res);
+		
+		/*// Debugging :<
+		printf("bnA = ");
+		for(int i = 0; i < bnA.nbytes + 1; i++) 
+		{
+			printf("%c", bnA.bytes[i]);
+		}
+		printf(", nbytes = %d\n", bnA.nbytes);
+		printf("bnB = ");
+		for(int i = 0; i < bnB.nbytes + 1; i++) 
+		{
+			printf("%c", bnB.bytes[i]);
+		}
+		printf(", nbytes = %d\n", bnB.nbytes);*/
+		if(hassmallerabs (bnA, bnB) == TRUE) 
+		{
+			res->bytes[res->nbytes] = NEGATIVE;
+		}
+		abssubtractBigNums (bnS, bnL, res);
 	} else if (bnA.bytes[bnA.nbytes] == NEGATIVE && bnB.bytes[bnB.nbytes] == POSITIVE) // N + P
 	{
-		// if abs(bnA) > abs(bnB)
-			// res->sign->negative
-		// abssubtractBigNums (bnS, bnL, res);
+		if(hassmallerabs (bnB, bnA) == TRUE) 
+		{
+			res->bytes[res->nbytes] = NEGATIVE;
+		}
+		abssubtractBigNums (bnS, bnL, res);
 	} 
 
 	return;
 }
 
-/*
-// !!! COMMENT THIS SECTION FOR SUBMISSION !!!
 // Subtract two BigNums and store result in a third BigNum
 void subtractBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 {
@@ -328,10 +391,9 @@ void subtractBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 	return;
 }
 
-// !!! COMMENT THIS SECTION FOR SUBMISSION !!!
 // Multiply two BigNums and store result in a third BigNum
 void multiplyBigNums (BigNum bnA, BigNum bnB, BigNum *res)
 {
 	// TODO
 	return;
-}*/
+}

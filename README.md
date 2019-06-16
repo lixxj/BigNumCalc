@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>COMP1521 19T2 - Week 02 Lab Exercise</title>
   <!-- base href="https://www.cse.unsw.edu.au/~cs1521/19T2/" -->
   <link rel="stylesheet" href="https://www.cse.unsw.edu.au/~cs1521/19T2/course.css" type="text/css" /></head>
 <body>

@@ -10,7 +10,6 @@
 <body>
   <nav class="top">
     <div class="left"><a href="https://www.cse.unsw.edu.au/~cs1521/19T2/index.php">COMP1521 19T2</a></div>
-    <div class="right"><a href="https://www.cse.unsw.edu.au/~cs1521/19T2/webcms3.html">Computer Systems Fundamentals</a></div>
   </nav>
   <header>
     <h1 class="heading">Week 02 Lab Exercise</h1>
@@ -351,30 +350,4 @@ Implement an interactive, arbitrary-precision calculator,
 like <cite>bc(1)</cite> or <cite>dc(1)</cite>,
 using your <code>BigNum</code> code.
 
-</ul>
-</aside>
-
-<h2>Submission</h2>
-<p>You need to submit
-<code id="0">BigNum.c</code>.
-
-You can submit them
-from the command line using <code>give</code>,
-or you can submit from within WebCMS.
-After submitting the code
-(either in this lab class
-or before the deadline)
-show your tutor,
-who'll give you feedback on your work
-and award a grade.<footer><p>
-  <strong>COMP1521 19T2: Computer Systems Fundamentals</strong>
-  is brought to you by <br />
-  the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a>
-  at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br />
-  For all enquiries, please email the class account at
-  <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br />
-  <small>CRICOS Provider 00098G</small>
-</p></footer>
-
-<script src="https://www.cse.unsw.edu.au/~cs1521/19T2/course.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML" async></script></body>
 </html>

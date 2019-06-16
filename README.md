@@ -12,8 +12,7 @@
     <div class="left"><a href="https://www.cse.unsw.edu.au/~cs1521/19T2/index.php">COMP1521 19T2</a></div>
   </nav>
   <header>
-    <h1 class="heading">Week 02 Lab Exercise</h1>
-    <p class="subheading lead">Big Numbers</p>
+    <h1 class="heading">Big Number Calculator in C</h1>
   </header>
 <h2>Objectives</h2>
 <ul>

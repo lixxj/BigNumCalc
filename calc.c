@@ -59,6 +59,10 @@ int main (int argc, char *argv[])
 	printf ("\nand ");  showBigNum (num2);
 	printf ("\nis ");   showBigNum (res);
 	printf ("\n");
+	
+	free(num1.bytes);
+	free(num2.bytes);
+	free(res.bytes);
 
 	/*// debugging :<
 	printf("num1 = ");

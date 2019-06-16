@@ -19,14 +19,6 @@
 <ul>
 <li>to practice manipulating dynamic arrays</li>
 <li>to implement the addition operator for very long numbers</li>
-</ul>
-<h2>Admin</h2>
-<dl class="dl-horizontal">
-<dt>Marks</dt><dd>A+=outstanding, A=very good, B=adequate, C=sub-standard, D=hopeless</dd>
-<dt>Demo</dt><dd>in this week's lab, or next week's lab</dd>
-<dt>Submit</dt><dd><code>give cs1521 lab02 BigNum.c</code> or via WebCMS</dd>
-<dt>Deadline</dt><dd>submit by Mon 17 Jun 2019, 08:59:59</dd></dl>
-<aside class="tip">
 <p>
 Doing the exercise well and correctly
 as specified will get you an A grade;
